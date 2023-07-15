@@ -70,9 +70,19 @@ jokeRating.addEventListener('click', function (event: Event) {
     }
 });
 
+// async function getIPAddress() {
+//     try {
+//         const response = await fetch('https://api.ipify.org?format=json');
+//         const data = await response.json();
+//         const ipAddress = data.ip;
+//         return ipAddress;
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
 async function getIPAddress() {
     try {
-        const response = await fetch('https://api.ipify.org?format=json');
+        const response = await fetch('https://api.ipgeolocation.io/ipgeo?apiKey=ba11e34072144bda9e795858e82ae4e9');
         const data = await response.json();
         const ipAddress = data.ip;
         return ipAddress;
