@@ -70,19 +70,9 @@ jokeRating.addEventListener('click', function (event: Event) {
     }
 });
 
-// async function getIPAddress() {
-//     try {
-//         const response = await fetch('https://api.ipify.org?format=json');
-//         const data = await response.json();
-//         const ipAddress = data.ip;
-//         return ipAddress;
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
 async function getIPAddress() {
     try {
-        const response = await fetch('https://api.ipgeolocation.io/ipgeo?apiKey=ba11e34072144bda9e795858e82ae4e9');
+        const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
         const ipAddress = data.ip;
         return ipAddress;
@@ -91,9 +81,30 @@ async function getIPAddress() {
     }
 }
 
+// async function getIPAddress() {
+//     try {
+//         const response = await fetch('https://api.ipgeolocation.io/ipgeo?apiKey=ba11e34072144bda9e795858e82ae4e9');
+//         const data = await response.json();
+//         const ipAddress = data.ip;
+//         return ipAddress;
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
+
+// async function getGeolocation(ipAddress: string) {
+//     try {
+//         const response = await fetch(`http://ip-api.com/json/${ipAddress}`);
+//         const data = await response.json();
+//         // Process the geolocation data
+//         return data;
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
 async function getGeolocation(ipAddress: string) {
     try {
-        const response = await fetch(`http://ip-api.com/json/${ipAddress}`);
+        const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=ba11e34072144bda9e795858e82ae4e9&ip=${ipAddress}`);
         const data = await response.json();
         // Process the geolocation data
         return data;
@@ -136,10 +147,10 @@ async function currentWeather() {
     }
 
     const ipAddress = await getIPAddress();
-    //console.log('User IP address:', ipAddress);
+    console.log('User IP address:', ipAddress);
     const geolocationData = await getGeolocation(ipAddress);
-    //console.log('Geolocation data:', geolocationData);
-    await fetchWeather(geolocationData.lat, geolocationData.lon);
+    console.log('Geolocation data:', geolocationData);
+    await fetchWeather(geolocationData.latitude, geolocationData.longitude);
     //console.log('Weather Data:', weatherData);
     //console.log(`Temp at ${geolocationData.city}: ${weatherData.main.temp}`);
 
