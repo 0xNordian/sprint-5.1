@@ -70,19 +70,47 @@ img {
 
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 100vh;
     background-image: url('../public/3028327.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+}
+
+.jokeBox{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .acudit-title{
     margin-top: 30px;
+}
+
+.weather{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    /* left: 0; */
+    top: calc(20px + env(safe-area-inset-bottom));
+    width: auto;
+    height: 100px;
+    padding: 25px 15px;
+    margin-left: 10px;
+    background: rgba(255, 255, 255, .4);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: x-large;
 }
 
 .acudits {
