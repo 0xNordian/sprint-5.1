@@ -100,7 +100,7 @@ body {
     position: fixed;
     /* left: 0; */
     top: calc(20px + env(safe-area-inset-bottom));
-    width: 125px;
+    width: 225px;
     height: 100px;
     padding: 25px 15px;
     margin-left: 10px;

@@ -185,8 +185,11 @@ async function currentWeather() {
     weatherTemp.innerHTML = `${weatherData?.main.temp.toFixed(1)} Cº`;
 
     feelsLike.innerHTML = `${weatherData?.main.feels_like.toFixed(1)} Cº`;
+    feelsLike.title = "Temperature Feels Like";
     humidity.innerHTML = `${weatherData?.main.humidity}%`;
+    humidity.title = "Humidity";
     airSpeed.innerHTML = `${weatherData?.wind.speed} km/h`;
+    airSpeed.title = "Air speed";
 }
 
 
