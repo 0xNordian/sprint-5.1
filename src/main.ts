@@ -6,6 +6,10 @@ const jokeRating = document.querySelector('.jokeRating') as HTMLDivElement;
 const joke = document.querySelector('.typewrite') as HTMLAnchorElement;
 const weatherTemp = document.querySelector('.current-temp') as HTMLDivElement;
 const weatherDesc = document.querySelector('.weather-desc') as HTMLDivElement;
+const feelsLike = document.querySelector('.temp-feels-like') as HTMLDivElement;
+const humidity = document.querySelector('.humidity') as HTMLDivElement;
+const airSpeed = document.querySelector('.air-speed') as HTMLDivElement;
+
 
 let isJokeRating = false;
 let isJoke = false;
@@ -151,7 +155,7 @@ async function currentWeather() {
     const geolocationData = await getGeolocation(ipAddress);
     console.log('Geolocation data:', geolocationData);
     await fetchWeather(geolocationData.latitude, geolocationData.longitude);
-    //console.log('Weather Data:', weatherData);
+    console.log('Weather Data:', weatherData);
     //console.log(`Temp at ${geolocationData.city}: ${weatherData.main.temp}`);
 
     switch (weatherData?.weather[0].main) {
@@ -179,6 +183,10 @@ async function currentWeather() {
     }
     //weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
     weatherTemp.innerHTML = `${weatherData?.main.temp.toFixed(1)} Cº`;
+
+    feelsLike.innerHTML = `${weatherData?.main.feels_like.toFixed(1)} Cº`;
+    humidity.innerHTML = `${weatherData?.main.humidity}%`;
+    airSpeed.innerHTML = `${weatherData?.wind.speed} km/h`;
 }
 
 
