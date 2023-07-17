@@ -137,6 +137,7 @@ body {
 
     overflow: visible;
     position: relative;
+    z-index: 100;
 }
 
 .matchbox {
