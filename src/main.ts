@@ -1,4 +1,5 @@
 import { fetchPosts } from './apiClient';
+import { fetchPosts2 } from './apiClient';
 import { report, setReport } from './reportAcudits';
 
 const jokeBtn = document.querySelector('.acudit-btn') as HTMLButtonElement;
@@ -18,6 +19,23 @@ let currentJoke: string;
 btnStatus = -1;
 //console.log("btnStatus: ", btnStatus)
 
+async function randomJoke(){
+    const randNumb = Math.floor(Math.random() * 2) + 1;
+    console.log("randNumb: ", randNumb);
+    if(randNumb === 1){
+        fetchPosts();
+        const data = await fetchPosts();
+        currentJoke = data.joke;
+        console.log("fetchPosts: ", currentJoke)
+        return currentJoke;
+    } else if (randNumb === 2){
+        fetchPosts2();
+        const data2 = await fetchPosts2();
+        currentJoke = data2.value;
+        console.log("fetchPosts2: ", currentJoke)
+        return currentJoke;
+    }
+}
 
 jokeBtn.addEventListener('click', async () => {
     if (!isJokeRating) {
@@ -29,16 +47,11 @@ jokeBtn.addEventListener('click', async () => {
         joke.style.display = 'flex';
         isJoke = true;
     }
-
     btnStatus === -1 ? btnStatus = 0 : btnStatus = 1;
     try {
-        //console.log("btnStatus: ", btnStatus)
-        fetchPosts();
-        const data = await fetchPosts();
-        currentJoke = data.joke;
-        //console.log("Fetched data: ", data)
+        const currentJoke = await randomJoke();
         const jokeDiv = document.querySelector('.typewrite');
-        jokeDiv!.innerHTML = data.joke;
+        jokeDiv!.innerHTML = currentJoke;
 
         // Pass the joke text to the report function
         if (btnStatus === 1) {
@@ -74,43 +87,22 @@ jokeRating.addEventListener('click', function (event: Event) {
     }
 });
 
-async function getIPAddress() {
+async function getIPAddress(): Promise<string | undefined> {
     try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        const ipAddress = data.ip;
-        return ipAddress;
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      const ipAddress = data.ip;
+      return ipAddress;
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
+      return undefined; // Explicitly return undefined in the catch block
     }
-}
+  }  
 
-// async function getIPAddress() {
-//     try {
-//         const response = await fetch('https://api.ipgeolocation.io/ipgeo?apiKey=ba11e34072144bda9e795858e82ae4e9');
-//         const data = await response.json();
-//         const ipAddress = data.ip;
-//         return ipAddress;
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
-
-// async function getGeolocation(ipAddress: string) {
-//     try {
-//         const response = await fetch(`http://ip-api.com/json/${ipAddress}`);
-//         const data = await response.json();
-//         // Process the geolocation data
-//         return data;
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
 async function getGeolocation(ipAddress: string) {
     try {
         const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=ba11e34072144bda9e795858e82ae4e9&ip=${ipAddress}`);
         const data = await response.json();
-        // Process the geolocation data
         return data;
     } catch (error) {
         console.error('Error:', error);
@@ -119,10 +111,15 @@ async function getGeolocation(ipAddress: string) {
 interface WeatherData {
     main: {
         temp: number;
+        feels_like: number;
+        humidity: number;
     };
     weather: {
         main: string;
     }[];
+    wind: {
+        speed: number;
+    };
 }
 
 let weatherData: WeatherData | undefined;
@@ -150,50 +147,49 @@ async function currentWeather() {
         clouds: "☁️"
     }
 
-    const ipAddress = await getIPAddress();
-    console.log('User IP address:', ipAddress);
-    const geolocationData = await getGeolocation(ipAddress);
-    console.log('Geolocation data:', geolocationData);
-    await fetchWeather(geolocationData.latitude, geolocationData.longitude);
-    console.log('Weather Data:', weatherData);
-    //console.log(`Temp at ${geolocationData.city}: ${weatherData.main.temp}`);
-
-    switch (weatherData?.weather[0].main) {
-        case 'Thunderstorm':
-            weatherDesc.innerHTML = `${weatherConditions.thunderstorm} ${weatherData.weather[0].main}`;
-            break;
-        case 'Drizzle':
-            weatherDesc.innerHTML = `${weatherConditions.drizzle} ${weatherData.weather[0].main}`;
-            break;
-        case 'Rain':
-            weatherDesc.innerHTML = `${weatherConditions.rain} ${weatherData.weather[0].main}`;
-            break;
-        case 'Snow':
-            weatherDesc.innerHTML = `${weatherConditions.snow} ${weatherData.weather[0].main}`;
-            break;
-        case 'Atmosphere':
-            weatherDesc.innerHTML = `${weatherConditions.atmosphere} ${weatherData.weather[0].main}`;
-            break;
-        case 'Clear':
-            weatherDesc.innerHTML = `${weatherConditions.clear} ${weatherData.weather[0].main}`;
-            break;
-        case 'Clouds':
-            weatherDesc.innerHTML = `${weatherConditions.clouds} ${weatherData.weather[0].main}`;
-            break;
+    const ipAddress = await getIPAddress() as string;
+    if(ipAddress){
+        console.log('User IP address:', ipAddress);
+        const geolocationData = await getGeolocation(ipAddress);
+        console.log('Geolocation data:', geolocationData);
+        await fetchWeather(geolocationData.latitude, geolocationData.longitude);
+        console.log('Weather Data:', weatherData);
+        //console.log(`Temp at ${geolocationData.city}: ${weatherData.main.temp}`);
+    
+        switch (weatherData?.weather[0].main) {
+            case 'Thunderstorm':
+                weatherDesc.innerHTML = `${weatherConditions.thunderstorm} ${weatherData.weather[0].main}`;
+                break;
+            case 'Drizzle':
+                weatherDesc.innerHTML = `${weatherConditions.drizzle} ${weatherData.weather[0].main}`;
+                break;
+            case 'Rain':
+                weatherDesc.innerHTML = `${weatherConditions.rain} ${weatherData.weather[0].main}`;
+                break;
+            case 'Snow':
+                weatherDesc.innerHTML = `${weatherConditions.snow} ${weatherData.weather[0].main}`;
+                break;
+            case 'Atmosphere':
+                weatherDesc.innerHTML = `${weatherConditions.atmosphere} ${weatherData.weather[0].main}`;
+                break;
+            case 'Clear':
+                weatherDesc.innerHTML = `${weatherConditions.clear} ${weatherData.weather[0].main}`;
+                break;
+            case 'Clouds':
+                weatherDesc.innerHTML = `${weatherConditions.clouds} ${weatherData.weather[0].main}`;
+                break;
+        }
+        weatherTemp.innerHTML = `${weatherData?.main.temp.toFixed(1)} Cº`;
+        feelsLike.innerHTML = `${weatherData?.main.feels_like.toFixed(1)} Cº`;
+        feelsLike.title = "Temperature Feels Like";
+        humidity.innerHTML = `${weatherData?.main.humidity}%`;
+        humidity.title = "Humidity";
+        airSpeed.innerHTML = `${weatherData?.wind.speed} km/h`;
+        airSpeed.title = "Air speed";
+    } else {
+        throw new Error('Check undefined')
     }
-    //weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
-    weatherTemp.innerHTML = `${weatherData?.main.temp.toFixed(1)} Cº`;
-
-    feelsLike.innerHTML = `${weatherData?.main.feels_like.toFixed(1)} Cº`;
-    feelsLike.title = "Temperature Feels Like";
-    humidity.innerHTML = `${weatherData?.main.humidity}%`;
-    humidity.title = "Humidity";
-    airSpeed.innerHTML = `${weatherData?.wind.speed} km/h`;
-    airSpeed.title = "Air speed";
+    
 }
 
-
-
 currentWeather();
-
-

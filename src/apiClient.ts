@@ -11,3 +11,18 @@ export async function fetchPosts() {
   .then(res => res.json())
   .then(data => data);
 }
+
+export async function fetchPosts2() {
+  const url = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random`;
+
+  return fetch(url, {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'X-RapidAPI-Key': '5c938e8bd6msh0d99635cbe087a3p1c5d37jsnfd83bb08cff3',
+        'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+      },
+  })
+  .then(res => res.json())
+  .then(data => data);
+}
