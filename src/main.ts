@@ -7,6 +7,7 @@ const jokeRating = document.querySelector('.jokeRating') as HTMLDivElement;
 const joke = document.querySelector('.typewrite') as HTMLAnchorElement;
 const weatherTemp = document.querySelector('.current-temp') as HTMLDivElement;
 const weatherDesc = document.querySelector('.weather-desc') as HTMLDivElement;
+const descEmoji = document.querySelector('.desc-emoji') as HTMLDivElement;
 const feelsLike = document.querySelector('.temp-feels-like') as HTMLDivElement;
 const humidity = document.querySelector('.humidity') as HTMLDivElement;
 const airSpeed = document.querySelector('.air-speed') as HTMLDivElement;
@@ -158,25 +159,31 @@ async function currentWeather() {
     
         switch (weatherData?.weather[0].main) {
             case 'Thunderstorm':
-                weatherDesc.innerHTML = `${weatherConditions.thunderstorm} ${weatherData.weather[0].main}`;
+                descEmoji.innerHTML = `${weatherConditions.thunderstorm}`;
+                weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
                 break;
             case 'Drizzle':
-                weatherDesc.innerHTML = `${weatherConditions.drizzle} ${weatherData.weather[0].main}`;
+                descEmoji.innerHTML = `${weatherConditions.drizzle}`;
+                weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
                 break;
             case 'Rain':
-                weatherDesc.innerHTML = `${weatherConditions.rain} ${weatherData.weather[0].main}`;
+                descEmoji.innerHTML = `${weatherConditions.rain}`;
+                weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
                 break;
             case 'Snow':
-                weatherDesc.innerHTML = `${weatherConditions.snow} ${weatherData.weather[0].main}`;
+                descEmoji.innerHTML = `${weatherConditions.snow}`;
+                weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
                 break;
             case 'Atmosphere':
                 weatherDesc.innerHTML = `${weatherConditions.atmosphere} ${weatherData.weather[0].main}`;
                 break;
             case 'Clear':
-                weatherDesc.innerHTML = `${weatherConditions.clear} ${weatherData.weather[0].main}`;
+                descEmoji.innerHTML = `${weatherConditions.clear}`;
+                weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
                 break;
             case 'Clouds':
-                weatherDesc.innerHTML = `${weatherConditions.clouds} ${weatherData.weather[0].main}`;
+                descEmoji.innerHTML = `${weatherConditions.clouds}`;
+                weatherDesc.innerHTML = `${weatherData.weather[0].main}`;
                 break;
         }
         weatherTemp.innerHTML = `${weatherData?.main.temp.toFixed(1)} Cº`;
