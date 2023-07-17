@@ -5,6 +5,8 @@
 *::before,
 *::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* Remove margin and padding for all elements */
@@ -88,6 +90,7 @@ img {
 body {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     background-image: url('../public/3028327.jpg');
     background-size: cover;
     background-position: center;
@@ -101,6 +104,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .acudit-title{

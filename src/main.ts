@@ -12,28 +12,26 @@ const feelsLike = document.querySelector('.temp-feels-like') as HTMLDivElement;
 const humidity = document.querySelector('.humidity') as HTMLDivElement;
 const airSpeed = document.querySelector('.air-speed') as HTMLDivElement;
 
-
 let isJokeRating = false;
 let isJoke = false;
 let btnStatus: -1 | 0 | 1;
 let currentJoke: string;
 btnStatus = -1;
-//console.log("btnStatus: ", btnStatus)
 
 async function randomJoke(){
     const randNumb = Math.floor(Math.random() * 2) + 1;
-    console.log("randNumb: ", randNumb);
+    //console.log("randNumb: ", randNumb);
     if(randNumb === 1){
         fetchPosts();
         const data = await fetchPosts();
         currentJoke = data.joke;
-        console.log("fetchPosts: ", currentJoke)
+        //console.log("fetchPosts: ", currentJoke)
         return currentJoke;
     } else if (randNumb === 2){
         fetchPosts2();
         const data2 = await fetchPosts2();
         currentJoke = data2.value;
-        console.log("fetchPosts2: ", currentJoke)
+        //console.log("fetchPosts2: ", currentJoke)
         return currentJoke;
     }
 }
@@ -53,8 +51,6 @@ jokeBtn.addEventListener('click', async () => {
         const currentJoke = await randomJoke();
         const jokeDiv = document.querySelector('.typewrite');
         jokeDiv!.innerHTML = currentJoke;
-
-        // Pass the joke text to the report function
         if (btnStatus === 1) {
             setReport();
         }
@@ -96,7 +92,7 @@ async function getIPAddress(): Promise<string | undefined> {
       return ipAddress;
     } catch (error) {
       console.error('Error:', error);
-      return undefined; // Explicitly return undefined in the catch block
+      return undefined;
     }
   }  
 
@@ -127,7 +123,6 @@ let weatherData: WeatherData | undefined;
 
 async function fetchWeather(lat: number, long: number) {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=15b6a234495ce855e125003b9b61dfdf&units=metric`;
-
     return fetch(url, {
         method: 'GET',
     })
