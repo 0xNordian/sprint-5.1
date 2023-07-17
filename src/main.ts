@@ -11,6 +11,7 @@ const descEmoji = document.querySelector('.desc-emoji') as HTMLDivElement;
 const feelsLike = document.querySelector('.temp-feels-like') as HTMLDivElement;
 const humidity = document.querySelector('.humidity') as HTMLDivElement;
 const airSpeed = document.querySelector('.air-speed') as HTMLDivElement;
+const celcius = document.querySelector('.celcius') as HTMLSpanElement;
 
 let isJokeRating = false;
 let isJoke = false;
@@ -18,16 +19,16 @@ let btnStatus: -1 | 0 | 1;
 let currentJoke: string;
 btnStatus = -1;
 
-async function randomJoke(){
+async function randomJoke() {
     const randNumb = Math.floor(Math.random() * 2) + 1;
     //console.log("randNumb: ", randNumb);
-    if(randNumb === 1){
+    if (randNumb === 1) {
         fetchPosts();
         const data = await fetchPosts();
         currentJoke = data.joke;
         //console.log("fetchPosts: ", currentJoke)
         return currentJoke;
-    } else if (randNumb === 2){
+    } else if (randNumb === 2) {
         fetchPosts2();
         const data2 = await fetchPosts2();
         currentJoke = data2.value;
@@ -86,15 +87,15 @@ jokeRating.addEventListener('click', function (event: Event) {
 
 async function getIPAddress(): Promise<string | undefined> {
     try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      const ipAddress = data.ip;
-      return ipAddress;
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        const ipAddress = data.ip;
+        return ipAddress;
     } catch (error) {
-      console.error('Error:', error);
-      return undefined;
+        console.error('Error:', error);
+        return undefined;
     }
-  }  
+}
 
 async function getGeolocation(ipAddress: string) {
     try {
@@ -144,14 +145,14 @@ async function currentWeather() {
     }
 
     const ipAddress = await getIPAddress() as string;
-    if(ipAddress){
+    if (ipAddress) {
         console.log('User IP address:', ipAddress);
         const geolocationData = await getGeolocation(ipAddress);
         console.log('Geolocation data:', geolocationData);
         await fetchWeather(geolocationData.latitude, geolocationData.longitude);
         console.log('Weather Data:', weatherData);
         //console.log(`Temp at ${geolocationData.city}: ${weatherData.main.temp}`);
-    
+
         switch (weatherData?.weather[0].main) {
             case 'Thunderstorm':
                 descEmoji.innerHTML = `${weatherConditions.thunderstorm}`;
@@ -186,12 +187,12 @@ async function currentWeather() {
         feelsLike.title = "Temperature Feels Like";
         humidity.innerHTML = `${weatherData?.main.humidity}%`;
         humidity.title = "Humidity";
-        airSpeed.innerHTML = `${weatherData?.wind.speed} km/h`;
+        airSpeed.innerHTML = `${weatherData?.wind.speed}`;
         airSpeed.title = "Air speed";
     } else {
         throw new Error('Check undefined')
     }
-    
+
 }
 
 currentWeather();
