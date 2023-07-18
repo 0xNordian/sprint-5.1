@@ -180,10 +180,12 @@ body {
         opacity: 0.5;
         transform: scale(0);
     }
+
     50% {
         opacity: 0;
         transform: scale(1.5);
     }
+
     100% {
         opacity: 0;
         transform: scale(2);
@@ -425,6 +427,8 @@ footer a {
         visibility: visible;
         text-align: center;
         display: block;
+        overflow: auto;
+        scroll-behavior: smooth;
     }
 
     .mobileMsg p {
@@ -461,4 +465,21 @@ footer a {
 .jokeRating.active~.acudits .acudit-title,
 .jokeRating.active~.acudits .acudit-btn {
     transform: translateY(-50px);
+}
+
+.mobileMsg::-webkit-scrollbar {
+    width: 8px;
+}
+
+.mobileMsg::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mobileMsg::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.mobileMsg::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
 }
