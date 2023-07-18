@@ -70,6 +70,10 @@ img {
 
 /* End of CSS Reset */
 
+.mobileMsg{
+    visibility: hidden;
+}
+
 .parent {
     display: grid;
     align-items: center;
@@ -226,30 +230,35 @@ body {
     font-size: 1rem;
 }
 
-.div11 { 
+.div11 {
     grid-area: 1 / 1 / 2 / 2;
     text-align: center;
 }
-.div22 { 
+
+.div22 {
     grid-area: 2 / 1 / 3 / 2;
     font-size: 1.5rem;
     text-align: center;
 }
-.div33 { 
-    grid-area: 1 / 2 / 2 / 3; 
+
+.div33 {
+    grid-area: 1 / 2 / 2 / 3;
     text-align: center;
 }
-.div44 { 
-    grid-area: 2 / 2 / 3 / 3; 
+
+.div44 {
+    grid-area: 2 / 2 / 3 / 3;
     font-size: 1.5rem;
     text-align: center;
 }
-.div55 { 
-    grid-area: 1 / 3 / 2 / 4; 
+
+.div55 {
+    grid-area: 1 / 3 / 2 / 4;
     text-align: center;
 }
-.div66 { 
-    grid-area: 2 / 3 / 3 / 4; 
+
+.div66 {
+    grid-area: 2 / 3 / 3 / 4;
     font-size: 1.5rem;
     text-align: center;
 }
@@ -366,4 +375,33 @@ footer a {
     display: none;
     gap: 20px;
     font-size: 3rem;
+}
+
+@media (max-width: 767px) {
+    .weather, 
+    .jokeBox {
+        visibility: visible;
+        display: none;
+    }
+    body{
+        display: flexbox;
+        visibility: visible;
+        background-image: none;
+        background-color: #00397a;
+    }
+    .mobMsgContainer{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+    .mobileMsg{
+        width: 100vw;
+        height: auto;
+        color: #fff;
+        visibility: visible;
+        text-align: center;
+    }
 }
