@@ -11,7 +11,6 @@ const descEmoji = document.querySelector('.desc-emoji') as HTMLDivElement;
 const feelsLike = document.querySelector('.temp-feels-like') as HTMLDivElement;
 const humidity = document.querySelector('.humidity') as HTMLDivElement;
 const airSpeed = document.querySelector('.air-speed') as HTMLDivElement;
-const celcius = document.querySelector('.celcius') as HTMLSpanElement;
 
 let isJokeRating = false;
 let isJoke = false;
@@ -41,8 +40,16 @@ jokeBtn.addEventListener('click', async () => {
     const emojis = jokeRating.querySelectorAll('.badJoke, .midJoke, .goodJoke');
     emojis.forEach((emoji) => emoji.classList.remove('active'));
     if (!isJokeRating) {
-        jokeRating.style.display = 'flex';
+        jokeRating.style.display = 'flex'; // Show the element
+        setTimeout(() => {
+            jokeRating.style.opacity = '1';
+            joke.style.opacity = '1'; // Fade in the element
+        }, 0);
         isJokeRating = true;
+
+        setTimeout(() => {
+            jokeRating.classList.add('active');
+        }, 0);
     }
 
     if (!isJoke) {
