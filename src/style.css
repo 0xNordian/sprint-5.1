@@ -350,12 +350,12 @@ body {
 }
 
 .acudit-btn:hover {
-    background-color: rgb(0, 234, 199);
+    background-color: rgb(0, 218, 185);
     transform: translateY(-2px);
 }
 
 .acudit-btn:active {
-    background-color: #00cbad;
+    background-color: #00bda0;
     transform: translateY(1px);
 }
 
@@ -451,8 +451,7 @@ footer a {
     transform: translateY(1px);
 }
 
-.acudit-title,
-.acudit-btn {
+.acudit-title {
     transition: transform 1s ease-in-out;
 }
 
