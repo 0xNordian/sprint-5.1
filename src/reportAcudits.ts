@@ -26,5 +26,5 @@ export function setReport(){
     reportAcudits = [...reportAcudits, ...tempReportAcudit];
     tempReportAcudit = [];
     //console.log("tempReportAcudit setReport: ", tempReportAcudit);
-    console.log("Final Report Acudits : ", reportAcudits);
+    console.log("reportAcudits[] : ", reportAcudits);
 }
