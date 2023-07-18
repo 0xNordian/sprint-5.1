@@ -12,7 +12,7 @@ export function report(joke: string, rating: number) {
 
     const reportEntry: ReportAcudit = {
         joke: joke,
-        score: rating, // Replace with the actual score value
+        score: rating,
         date: date
     };
 
@@ -22,10 +22,9 @@ export function report(joke: string, rating: number) {
 }
 
 export function setReport(){
-    //localStorage.setItem('reportAcudits', JSON.stringify(reportAcudits));
+    localStorage.setItem('reportAcudits', JSON.stringify(reportAcudits));
     reportAcudits = [...reportAcudits, ...tempReportAcudit];
     tempReportAcudit = [];
     //console.log("tempReportAcudit setReport: ", tempReportAcudit);
     console.log("Final Report Acudits : ", reportAcudits);
 }
-
