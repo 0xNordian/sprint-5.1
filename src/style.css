@@ -59,6 +59,8 @@ img {
 
 .mobileMsg {
     visibility: hidden;
+    display: none;
+    font-size: 1.5rem;
 }
 
 .parent {
@@ -422,6 +424,11 @@ footer a {
         color: #fff;
         visibility: visible;
         text-align: center;
+        display: block;
+    }
+
+    .mobileMsg p {
+        margin: 50px 40px;
     }
 }
 
