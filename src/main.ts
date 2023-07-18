@@ -38,6 +38,8 @@ async function randomJoke() {
 }
 
 jokeBtn.addEventListener('click', async () => {
+    const emojis = jokeRating.querySelectorAll('.badJoke, .midJoke, .goodJoke');
+    emojis.forEach((emoji) => emoji.classList.remove('active'));
     if (!isJokeRating) {
         jokeRating.style.display = 'flex';
         isJokeRating = true;
@@ -76,6 +78,18 @@ function score(dataRating: string) {
 
 jokeRating.addEventListener('click', function (event: Event) {
     event.preventDefault();
+    const clickedElement = event.target as HTMLElement;
+    const emojiElement = clickedElement.closest('.badJoke, .midJoke, .goodJoke') as HTMLElement | null;
+
+    if (emojiElement) {
+        // Remove 'active' class from all emojis
+        const emojis = jokeRating.querySelectorAll('.badJoke, .midJoke, .goodJoke');
+        emojis.forEach((emoji) => emoji.classList.remove('active'));
+
+        // Add 'active' class to the clicked emoji
+        emojiElement.classList.add('active');
+    }
+
     const target = event.target as HTMLElement;
     if (target.tagName === 'A') {
         const rating = target.getAttribute('data-rating');

@@ -70,7 +70,7 @@ img {
 
 /* End of CSS Reset */
 
-.mobileMsg{
+.mobileMsg {
     visibility: hidden;
 }
 
@@ -125,13 +125,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 1900px;
+    height: 900px;
     background-image: url("../public/mainBlob.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-  }
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+}
 
 .acudit-title {
     font-size: 2.5rem;
@@ -299,7 +300,8 @@ body {
 .acudits {
     width: 80%;
     max-width: auto;
-    margin: 0px 500px; /* Adjust the max-width as needed */
+    margin: 0px 500px;
+    /* Adjust the max-width as needed */
     height: auto;
     /* background: rgba(255, 255, 255, 0.8); */
     /* backdrop-filter: blur(10px); */
@@ -310,22 +312,22 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
+}
 
 .typewrite {
-    width: auto;
+    width: 600px;
     height: 100px;
-    margin: 50px 100px;
+    margin: 75px 50px;
     display: none;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    font-size: larger;
+    font-size: 1.5rem;
     color: #00FFD9;
 }
 
-.typewriter{
-    margin: 100px 0px;
+.typewriter {
+    margin: auto 0px;
 }
 
 .acudit-btn {
@@ -385,18 +387,21 @@ footer a {
 }
 
 @media (max-width: 767px) {
-    .weather, 
+
+    .weather,
     .jokeBox {
         visibility: visible;
         display: none;
     }
-    body{
+
+    body {
         display: flexbox;
         visibility: visible;
         background-image: none;
         background-color: #00397a;
     }
-    .mobMsgContainer{
+
+    .mobMsgContainer {
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -404,11 +409,33 @@ footer a {
         align-items: center;
         padding: 10px;
     }
-    .mobileMsg{
+
+    .mobileMsg {
         width: 100vw;
         height: auto;
         color: #fff;
         visibility: visible;
         text-align: center;
     }
+}
+
+.jokeRating .badJoke,
+.jokeRating .midJoke,
+.jokeRating .goodJoke{
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    filter: grayscale(100);
+}
+
+.jokeRating .badJoke:hover,
+.jokeRating .midJoke:hover,
+.jokeRating .goodJoke:hover {
+    transform: translateY(-2px);
+    filter: grayscale(0);
+}
+
+.jokeRating .badJoke.active,
+.jokeRating .midJoke.active,
+.jokeRating .goodJoke.active {
+    filter: grayscale(0);
+    transform: translateY(1px);
 }
