@@ -40,10 +40,10 @@ jokeBtn.addEventListener('click', async () => {
     const emojis = jokeRating.querySelectorAll('.badJoke, .midJoke, .goodJoke');
     emojis.forEach((emoji) => emoji.classList.remove('active'));
     if (!isJokeRating) {
-        jokeRating.style.display = 'flex'; // Show the element
+        jokeRating.style.display = 'flex';
         setTimeout(() => {
             jokeRating.style.opacity = '1';
-            joke.style.opacity = '1'; // Fade in the element
+            joke.style.opacity = '1';
         }, 0);
         isJokeRating = true;
 
@@ -89,11 +89,8 @@ jokeRating.addEventListener('click', function (event: Event) {
     const emojiElement = clickedElement.closest('.badJoke, .midJoke, .goodJoke') as HTMLElement | null;
 
     if (emojiElement) {
-        // Remove 'active' class from all emojis
         const emojis = jokeRating.querySelectorAll('.badJoke, .midJoke, .goodJoke');
         emojis.forEach((emoji) => emoji.classList.remove('active'));
-
-        // Add 'active' class to the clicked emoji
         emojiElement.classList.add('active');
     }
 
@@ -172,7 +169,6 @@ async function currentWeather() {
         console.log('Geolocation data:', geolocationData);
         await fetchWeather(geolocationData.latitude, geolocationData.longitude);
         console.log('Weather Data:', weatherData);
-        //console.log(`Temp at ${geolocationData.city}: ${weatherData.main.temp}`);
 
         switch (weatherData?.weather[0].main) {
             case 'Thunderstorm':
